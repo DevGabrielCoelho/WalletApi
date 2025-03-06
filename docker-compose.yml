@@ -20,7 +20,7 @@ services:
     ports:
       - "${DOCKER_ASP_NET_CORE_PORT}"
     depends_on:
-      - mssql
+      - postgres
     networks:
       - app_network
     environment:
