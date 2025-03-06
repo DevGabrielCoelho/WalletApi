@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace WalletApi.Migrations
 {
     /// <inheritdoc />
-    public partial class f : Migration
+    public partial class postgresmi : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,17 +15,17 @@ namespace WalletApi.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    AccountId = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Document = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Birthday = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SessionToken = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Id = table.Column<string>(type: "text", maxLength: 300, nullable: false),
+                    AccountId = table.Column<string>(type: "text", maxLength: 300, nullable: false),
+                    Name = table.Column<string>(type: "text", maxLength: 300, nullable: false),
+                    Document = table.Column<string>(type: "text", maxLength: 300, nullable: false),
+                    Birthday = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Email = table.Column<string>(type: "text", maxLength: 300, nullable: false),
+                    Phone = table.Column<string>(type: "text", maxLength: 300, nullable: false),
+                    PasswordHash = table.Column<string>(type: "text", maxLength: 300, nullable: false),
+                    SessionToken = table.Column<string>(type: "text", maxLength: 300, nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -36,11 +36,11 @@ namespace WalletApi.Migrations
                 name: "Accounts",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    Balance = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Id = table.Column<string>(type: "text", maxLength: 300, nullable: false),
+                    UserId = table.Column<string>(type: "text", maxLength: 300, nullable: false),
+                    Balance = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -57,16 +57,16 @@ namespace WalletApi.Migrations
                 name: "Transactions",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ToAccountId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    FromAccountId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    SenderIp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Geolocation = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    Value = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
-                    RefundingId = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<string>(type: "text", maxLength: 300, nullable: false),
+                    ToAccountId = table.Column<string>(type: "text", maxLength: 300, nullable: false),
+                    FromAccountId = table.Column<string>(type: "text", maxLength: 300, nullable: false),
+                    SenderIp = table.Column<string>(type: "text", maxLength: 300, nullable: false),
+                    Geolocation = table.Column<string>(type: "text", maxLength: 300, nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp", nullable: false),
+                    Status = table.Column<int>(type: "integer", nullable: false),
+                    Value = table.Column<decimal>(type: "numeric(18,2)", precision: 18, scale: 2, nullable: false),
+                    RefundingId = table.Column<string>(type: "text", maxLength: 300, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -89,12 +89,12 @@ namespace WalletApi.Migrations
                 name: "Refundings",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    TransactionId = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Id = table.Column<string>(type: "text", maxLength: 300, nullable: false),
+                    TransactionId = table.Column<string>(type: "text", maxLength: 300, nullable: false),
+                    Description = table.Column<string>(type: "text", maxLength: 300, nullable: false),
+                    CreatedBy = table.Column<string>(type: "text", maxLength: 300, nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -111,15 +111,13 @@ namespace WalletApi.Migrations
                 name: "IX_Accounts_UserId",
                 table: "Accounts",
                 column: "UserId",
-                unique: true,
-                filter: "[UserId] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Refundings_TransactionId",
                 table: "Refundings",
                 column: "TransactionId",
-                unique: true,
-                filter: "[TransactionId] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Transactions_FromAccountId",
