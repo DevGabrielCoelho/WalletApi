@@ -42,4 +42,4 @@ fi
 
 echo "Starting the .NET application..."
 
-dotnet /app/publish/CalendarAPI.dll
+dotnet /app/publish/WalletApi.dll
