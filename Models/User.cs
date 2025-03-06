@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http.HttpResults;
 
@@ -35,6 +36,7 @@ namespace WalletApi.Models
         [Required]
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         [NotMapped]
+        [JsonIgnore]
         public Account Account { get; set; } = new();
 
         public override string ToString()

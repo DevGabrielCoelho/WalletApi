@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using WalletApi.Enums;
@@ -33,10 +34,13 @@ namespace WalletApi.Models
         [Precision(18,2)]
         public decimal Value { get; set; }
         [NotMapped]
+        [JsonIgnore]
         public Account ToAccount { get; set; } = new();
         [NotMapped]
+        [JsonIgnore]
         public Account FromAccount { get; set; } = new();
         [NotMapped]
+        [JsonIgnore]
         public Refunding Refunding { get; set; } = new();
         [Required]
         public string RefundingId { get; set; } = string.Empty;

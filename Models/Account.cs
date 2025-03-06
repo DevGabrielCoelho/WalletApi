@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,10 +26,13 @@ namespace WalletApi.Models
         [Required]
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         [NotMapped]
+        [JsonIgnore]
         public User User { get; set; } = new();
         [NotMapped]
+        [JsonIgnore]
         public List<Transaction> IncomingTransactions { get; set; } = new();
         [NotMapped]
+        [JsonIgnore]
         public List<Transaction> OutgoingTransactions { get; set; } = new();
 
         public override string ToString()
