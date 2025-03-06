@@ -14,11 +14,7 @@ RUN wget https://packages.microsoft.com/config/debian/12/packages-microsoft-prod
     apt-get update && \
     apt-get install -y dotnet-sdk-9.0 aspnetcore-runtime-9.0
 
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc && \
-    sudo curl https://packages.microsoft.com/config/debian/12/prod.list > /etc/apt/sources.list.d/mssql-release.list && \
-    sudo apt-get update && \
-    ACCEPT_EULA=Y apt-get install -y mssql-tools && \
-    echo 'export PATH="$PATH:/opt/mssql-tools/bin"' > /etc/profile.d/mssql-tools.sh
+RUN apt-get update && apt-get install -y postgresql-client
 
 RUN dotnet tool install --global dotnet-ef
 ENV PATH="$PATH:/root/.dotnet/tools"
@@ -36,3 +32,5 @@ RUN chmod +x /init-db.sh
 WORKDIR /app
 
 CMD envsubst < /init-db.sh | bash
+
+WORKDIR /src
