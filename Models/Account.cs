@@ -27,7 +27,7 @@ namespace WalletApi.Models
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         [NotMapped]
         [JsonIgnore]
-        public User User { get; set; } = new();
+        public User User { get; set; }
         [NotMapped]
         [JsonIgnore]
         public List<Transaction> IncomingTransactions { get; set; } = new();

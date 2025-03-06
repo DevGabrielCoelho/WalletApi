@@ -38,7 +38,7 @@ namespace WalletApi.Mappers
                 Phone = createUserDto.Phone,
                 PasswordHash = createUserDto.Password,
                 CreatedAt = timeNow,
-                UpdatedAt = timeNow,
+                UpdatedAt = timeNow
             };
         }
     }

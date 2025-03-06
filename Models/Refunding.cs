@@ -26,7 +26,7 @@ namespace WalletApi.Models
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         [NotMapped]
         [JsonIgnore]
-        public Transaction Transaction { get; set; } = new();
+        public Transaction Transaction { get; set; }
 
         public override string ToString()
         {

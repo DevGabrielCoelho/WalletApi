@@ -37,7 +37,7 @@ namespace WalletApi.Models
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         [NotMapped]
         [JsonIgnore]
-        public Account Account { get; set; } = new();
+        public Account Account { get; set; }
 
         public override string ToString()
         {

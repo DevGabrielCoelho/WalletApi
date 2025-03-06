@@ -35,13 +35,13 @@ namespace WalletApi.Models
         public decimal Value { get; set; }
         [NotMapped]
         [JsonIgnore]
-        public Account ToAccount { get; set; } = new();
+        public Account ToAccount { get; set; }
         [NotMapped]
         [JsonIgnore]
-        public Account FromAccount { get; set; } = new();
+        public Account FromAccount { get; set; }
         [NotMapped]
         [JsonIgnore]
-        public Refunding Refunding { get; set; } = new();
+        public Refunding Refunding { get; set; }
         [Required]
         public string RefundingId { get; set; } = string.Empty;
 
