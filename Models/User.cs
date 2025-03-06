@@ -32,9 +32,9 @@ namespace WalletApi.Models
         [Required]
         public string SessionToken { get; set; } = string.Empty;
         [Required]
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         [Required]
-        public DateTime UpdatedAt { get; set; } = DateTime.Now;
+        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
         [NotMapped]
         [JsonIgnore]
         public Account Account { get; set; }

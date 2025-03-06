@@ -22,9 +22,9 @@ namespace WalletApi.Models
         [Required]
         public decimal Balance { get; set; }
         [Required]
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         [Required]
-        public DateTime UpdatedAt { get; set; } = DateTime.Now;
+        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
         [NotMapped]
         [JsonIgnore]
         public User User { get; set; }
