@@ -1,17 +1,16 @@
 services:
-  mssql:
-    image: mcr.microsoft.com/mssql/server:2022-latest
+  postgres:
+    image: postgres:latest
     environment:
-      - ACCEPT_EULA=Y
-      - MSSQL_PID=${DOCKER_MSSQL_PID}
-      - SA_PASSWORD=${DOCKER_SA_PASSWORD}
-      - MSSQL_ENABLE_TLS=false
+      - POSTGRES_USER=${POSTGRES_DOCKER_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_DOCKER_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DOCKER_DB}
     ports:
-      - "${DOCKER_MSQL_PORT}"
+      - "${DOCKER_NPGSQL_PORT}"
     volumes:
-      - mssql_data:/var/opt/mssql/data
-      - mssql_log:/var/opt/mssql/log
-      - mssql_secrets:/var/opt/mssql/secrets
+      - postgres_data:/var/opt/postgres/data
+      - postgres_log:/var/opt/postgres/log
+      - postgres_secrets:/var/opt/postgres/secrets
     networks:
       - app_network
     user: "root"
@@ -27,6 +26,7 @@ services:
     environment:
       - ASPNETCORE_URLS=${URLS}
       - ConnectionStrings__DefaultConnection=${DEFAULT_CONNECTION}
+      - ConnectionStrings__Npgsql=${ConnectionStrings_DOCKER_Npgsql}
       - Logging__LogLevel__Default=${LOGGING_LOG_LEVEL_DEFAULT}
       - Logging__LogLevel__Microsoft.AspNetCore=${LOGGING_LOG_LEVEL_MICROSOFT_ASP_NET_CORE}
       - AllowedHosts=${ALLOWED_HOSTS}
@@ -45,9 +45,9 @@ services:
 
 
 volumes:
-  mssql_data:
-  mssql_log:
-  mssql_secrets:
+  postgres_data:
+  postgres_log:
+  postgres_secrets:
   aspnetcore_flag_file:
 
 networks:

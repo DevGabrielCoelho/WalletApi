@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -f /app/.env ]; then
+if [ -f /src/.env ]; then
     while IFS= read -r line || [[ -n "$line" ]]; do
         [[ "$line" =~ ^#.*$ ]] && continue
         [[ -z "$line" ]] && continue
@@ -9,39 +9,37 @@ if [ -f /app/.env ]; then
             value=$(echo "$line" | cut -d '=' -f 2-)
             export "$key"="$value"
         fi
-    done < /app/.env
+    done < /src/.env
 fi
 
 FLAG_FILE="/app/flag_file/migrations_done.flag"
 
-echo "Aguardando SQL Server iniciar..."
+echo "Waiting for PostgreSQL to start..."
 
-until eval "$SQLCMD_COMMAND" > /dev/null 2>&1; do
-    echo "Aguardando SQL Server... Tentando novamente em 5 segundos."
+until pg_isready -h postgres -p 5432 -U "$POSTGRES_DOCKER_USER" > /dev/null 2>&1; do
+    echo "Waiting for PostgreSQL... Retrying in 5 seconds."
     sleep 5
 done
 
-echo "SQL Server iniciado."
+echo "PostgreSQL started."
 
 if [ ! -f "$FLAG_FILE" ]; then
-    echo "Executando as migrações..."
-
+    echo "Running migrations..."
+    sleep 5
     cd /src
 
-    dotnet ef database update
+    dotnet ef database update --connection "$ConnectionStrings__Npgsql"
 
     touch "$FLAG_FILE"
     
-    echo "Migrações realizadas em $(date)" >> "$FLAG_FILE"
+    echo "Migrations completed at $(date)" >> "$FLAG_FILE"
 
-    echo "Migrações concluídas!"
+    echo "Migrations completed!"
 else
-    echo "As migrações já foram realizadas anteriormente."
-    echo "Tentativa de migração em $(date) (já realizado)" >> "$FLAG_FILE"
+    echo "Migrations have already been performed."
+    echo "Migration attempt at $(date) (already done)" >> "$FLAG_FILE"
 fi
 
-echo "Iniciando o aplicativo .NET..."
+echo "Starting the .NET application..."
 
-rm /app/.env
-
-dotnet /app/publish/WalletApi.dll
+dotnet /app/publish/CalendarAPI.dll

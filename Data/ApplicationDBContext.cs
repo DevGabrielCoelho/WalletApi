@@ -23,6 +23,106 @@ namespace WalletApi.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
+                .Property(u => u.Id)
+                .HasMaxLength(300)
+                .IsRequired();
+
+            modelBuilder.Entity<User>()
+                .Property(u => u.AccountId)
+                .HasMaxLength(300)
+                .IsRequired();
+
+            modelBuilder.Entity<User>()
+                .Property(u => u.Name)
+                .HasMaxLength(300)
+                .IsRequired();
+
+            modelBuilder.Entity<User>()
+                .Property(u => u.Document)
+                .HasMaxLength(300)
+                .IsRequired();
+
+            modelBuilder.Entity<User>()
+                .Property(u => u.Email)
+                .HasMaxLength(300)
+                .IsRequired();
+
+            modelBuilder.Entity<User>()
+                .Property(u => u.Phone)
+                .HasMaxLength(300)
+                .IsRequired();
+
+            modelBuilder.Entity<User>()
+                .Property(u => u.PasswordHash)
+                .HasMaxLength(300)
+                .IsRequired();
+            
+            modelBuilder.Entity<User>()
+                .Property(u => u.SessionToken)
+                .HasMaxLength(300)
+                .IsRequired();
+
+            modelBuilder.Entity<Account>()
+                .Property(u => u.Id)
+                .HasMaxLength(300)
+                .IsRequired();
+
+            modelBuilder.Entity<Account>()
+                .Property(u => u.UserId)
+                .HasMaxLength(300)
+                .IsRequired();
+
+            modelBuilder.Entity<Refunding>()
+                .Property(u => u.CreatedBy)
+                .HasMaxLength(300)
+                .IsRequired();
+
+            modelBuilder.Entity<Refunding>()
+                .Property(u => u.Id)
+                .HasMaxLength(300)
+                .IsRequired();
+
+            modelBuilder.Entity<Refunding>()
+                .Property(u => u.TransactionId)
+                .HasMaxLength(300)
+                .IsRequired();
+
+            modelBuilder.Entity<Refunding>()
+                .Property(u => u.Description)
+                .HasMaxLength(300)
+                .IsRequired();
+
+            modelBuilder.Entity<Transaction>()
+                .Property(u => u.FromAccountId)
+                .HasMaxLength(300)
+                .IsRequired();
+            
+            modelBuilder.Entity<Transaction>()
+                .Property(u => u.Geolocation)
+                .HasMaxLength(300)
+                .IsRequired();
+
+            modelBuilder.Entity<Transaction>()
+                .Property(u => u.Id)
+                .HasMaxLength(300)
+                .IsRequired();
+
+            modelBuilder.Entity<Transaction>()
+                .Property(u => u.SenderIp)
+                .HasMaxLength(300)
+                .IsRequired();
+
+            modelBuilder.Entity<Transaction>()
+                .Property(u => u.Status)
+                .HasMaxLength(300)
+                .IsRequired();
+
+            modelBuilder.Entity<Transaction>()
+                .Property(u => u.ToAccountId)
+                .HasMaxLength(300)
+                .IsRequired();
+
+            modelBuilder.Entity<User>()
                 .HasOne(user => user.Account)
                 .WithOne(account => account.User)
                 .HasForeignKey<Account>(account => account.UserId)

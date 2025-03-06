@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -9,14 +11,24 @@ namespace WalletApi.Models
 {
     public class Account
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Required]
         public string Id { get; set; } = Guid.NewGuid().ToString();
-        public string? UserId { get; set; }
+        [Required]
+        public string UserId { get; set; } = string.Empty;
         [Precision(18,2)]
+        [Required]
         public decimal Balance { get; set; }
+        [Required]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+        [Required]
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
-        public User? User { get; set; }
+        [NotMapped]
+        public User User { get; set; } = new();
+        [NotMapped]
         public List<Transaction> IncomingTransactions { get; set; } = new();
+        [NotMapped]
         public List<Transaction> OutgoingTransactions { get; set; } = new();
 
         public override string ToString()

@@ -1,5 +1,5 @@
-FROM mcr.microsoft.com/mssql/server:2022-latest AS sqlserver
-EXPOSE 1433
+FROM postgres:latest AS postgres
+EXPOSE 5432
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS aspnetcore
 WORKDIR /app

@@ -9,6 +9,7 @@ A digital wallet management API, enabling control of financial transactions, bal
 - Real-time balance check.
 - Transfer between accounts with the possibility of reversal.
 - Secure authentication and authorization using JWT and Argon2.
+- Docker support for easy deployment.  
 
 ## 📋 Prerequisites
 
