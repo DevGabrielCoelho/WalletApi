@@ -30,7 +30,7 @@ namespace WalletApi.Controllers
             _passwordHasher = passwordHasher;
         }
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromQuery] CreateUserDto createUserDto)
+        public async Task<IActionResult> Register([FromBody] CreateUserDto createUserDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
