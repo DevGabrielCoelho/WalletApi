@@ -27,8 +27,7 @@ namespace WalletApi.Mappers
 
         public static User ToUserFromCreateUserDto(this CreateUserDto createUserDto)
         {
-            var timeNow = DateTime.Now;
-            timeNow = timeNow.ToUniversalTime();
+            var timeNow = DateTime.UtcNow;
             return new User
             {
                 Id = Guid.NewGuid().ToString(),
