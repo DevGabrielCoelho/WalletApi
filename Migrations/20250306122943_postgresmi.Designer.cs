@@ -12,7 +12,7 @@ using WalletApi.Data;
 namespace WalletApi.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20250306110427_postgresmi")]
+    [Migration("20250306122943_postgresmi")]
     partial class postgresmi
     {
         /// <inheritdoc />
